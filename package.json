@@ -1,0 +1,15 @@
+{
+  "name": "mdn-zoom",
+  "description": "Simple and lightweight library to add zoom functionality to images.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [
+    "zoom",
+    "popup",
+    "preview"
+  ],
+  "author": "Carlos Medina",
+  "license": "SEE LICENSE IN LICENSE",
+  "packageManager": "pnpm@10.7.0"
+}
