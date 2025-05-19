@@ -11,5 +11,12 @@
   ],
   "author": "Carlos Medina",
   "license": "SEE LICENSE IN LICENSE",
-  "packageManager": "pnpm@10.7.0"
+  "packageManager": "pnpm@10.7.0",
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "globals": "^16.1.0",
+    "prettier": "3.5.3"
+  }
 }
