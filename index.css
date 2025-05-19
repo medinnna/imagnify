@@ -36,6 +36,7 @@ body {
     transition: transform 0.4s ease;
     cursor: zoom-out;
     will-change: transform;
+    opacity: 0;
     z-index: 1001;
   }
 }

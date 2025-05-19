@@ -2,6 +2,7 @@ const zoomOverlay = document.createElement("div");
 zoomOverlay.className = "zoom-overlay";
 const zoomImage = document.createElement("img");
 zoomImage.className = "zoom-image";
+let currentScroll = window.pageYOffset;
 
 export function mdnZoom(options) {
   const config = {
@@ -18,21 +19,12 @@ export function mdnZoom(options) {
     const images = document.querySelectorAll(config.selector);
 
     images.forEach((image) => {
-      image.addEventListener("click", (e) => {
-        const {
-          src: imageSrc,
-          width: imageWidth,
-          height: imageHeight,
-        } = e.currentTarget;
-        const currentScroll = window.pageYOffset;
-        const { top, left: offsetLeft } =
-          e.currentTarget.getBoundingClientRect();
+      image.addEventListener("click", () => {
+        const { src: imageSrc, width: imageWidth, height: imageHeight } = image;
+        const { top, left: offsetLeft } = image.getBoundingClientRect();
         const offsetTop = top + currentScroll;
 
-        image.classList.add("is-hidden");
-
         zoomOverlay.style.backgroundColor = config.background;
-        // zoomOverlay.style.opacity = config.opacity;
 
         zoomImage.src = imageSrc;
         zoomImage.width = imageWidth;
@@ -43,9 +35,14 @@ export function mdnZoom(options) {
         document.body.appendChild(zoomOverlay);
         document.body.appendChild(zoomImage);
 
-        setTimeout(() => {
+        zoomImage.onload = () => {
+          const { top, left: offsetLeft } = image.getBoundingClientRect();
+          const offsetTop = top + currentScroll;
           const maxZoomWidth = windowWidth - config.margin * 2;
           const maxZoomHeight = windowHeight - config.margin * 2;
+
+          zoomImage.style.top = `${offsetTop}px`;
+          zoomImage.style.left = `${offsetLeft}px`;
 
           const zoomRatio = Math.min(
             maxZoomHeight / imageHeight,
@@ -59,16 +56,21 @@ export function mdnZoom(options) {
             (windowWidth - imageWidth * zoomRatio) / 2 - offsetLeft;
 
           document.body.classList.add("zoom-active");
+          image.classList.add("is-hidden");
 
+          zoomImage.style.opacity = 1;
           zoomImage.style.transform = `translate(${zoomLeftOffset}px, ${zoomTopOffset}px) scale(${zoomRatio})`;
-        }, 50);
+        };
       });
     });
 
     zoomImage.addEventListener("click", closeZoom);
   });
 
-  window.addEventListener("scroll", closeZoom);
+  window.addEventListener("scroll", () => {
+    currentScroll = window.pageYOffset;
+    closeZoom();
+  });
   window.addEventListener("resize", closeZoom);
 }
 
