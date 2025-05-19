@@ -1,3 +1,8 @@
+const zoomOverlay = document.createElement("div");
+zoomOverlay.className = "zoom-overlay";
+const zoomImage = document.createElement("img");
+zoomImage.className = "zoom-image";
+
 export function mdnZoom(options) {
   const config = {
     selector: options?.selector || "img[data-zoom]",
@@ -9,11 +14,6 @@ export function mdnZoom(options) {
   document.addEventListener("DOMContentLoaded", () => {
     const windowWidth = document.body.offsetWidth;
     const windowHeight = window.innerHeight;
-
-    const zoomOverlay = document.createElement("div");
-    zoomOverlay.className = "zoom-overlay";
-    const zoomImage = document.createElement("img");
-    zoomImage.className = "zoom-image";
 
     const images = document.querySelectorAll(config.selector);
 
@@ -67,9 +67,10 @@ export function mdnZoom(options) {
 
     zoomImage.addEventListener("click", closeZoom);
   });
-}
 
-window.addEventListener("scroll", closeZoom);
+  window.addEventListener("scroll", closeZoom);
+  window.addEventListener("resize", closeZoom);
+}
 
 function closeZoom() {
   const isZoomed = document.body.classList.contains("zoom-active");
