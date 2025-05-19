@@ -9,6 +9,9 @@
     "popup",
     "preview"
   ],
+  "scripts": {
+    "format": "prettier . --write"
+  },
   "author": "Carlos Medina",
   "license": "SEE LICENSE IN LICENSE",
   "packageManager": "pnpm@10.7.0",
