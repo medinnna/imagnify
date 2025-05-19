@@ -23,10 +23,11 @@ export function mdnZoom(options) {
         const { src: imageSrc, width: imageWidth, height: imageHeight } = image;
         const { top, left: offsetLeft } = image.getBoundingClientRect();
         const offsetTop = top + currentScroll;
+        const imageFullSrc = image.dataset.zoom;
 
         zoomOverlay.style.backgroundColor = config.background;
 
-        zoomImage.src = imageSrc;
+        zoomImage.src = imageFullSrc || imageSrc;
         zoomImage.width = imageWidth;
         zoomImage.height = imageHeight;
         zoomImage.style.top = `${offsetTop}px`;
