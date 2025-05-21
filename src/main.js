@@ -3,6 +3,7 @@ zoomOverlay.className = 'zoom-overlay'
 const zoomImage = document.createElement('img')
 zoomImage.className = 'zoom-image'
 let currentScroll = window.pageYOffset
+import './style.css'
 
 export function mdnZoom(options) {
   const config = {

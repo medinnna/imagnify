@@ -31,6 +31,7 @@ body {
 
   .zoom-image {
     position: absolute;
+    object-fit: cover;
     transform: translateY(0);
     transform-origin: top left;
     transition: transform 0.4s ease;

@@ -2,7 +2,7 @@
   "name": "mdn-zoom",
   "description": "Simple and lightweight library to add zoom functionality to images.",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/mdn-zoom.min.js",
   "type": "module",
   "keywords": [
     "zoom",
@@ -10,6 +10,8 @@
     "preview"
   ],
   "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
     "format": "prettier . --write"
   },
   "author": "Carlos Medina",
@@ -17,9 +19,14 @@
   "packageManager": "pnpm@10.7.0",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "globals": "^16.1.0",
-    "prettier": "3.5.3"
+    "prettier": "3.5.3",
+    "rollup": "^4.41.0",
+    "rollup-plugin-import-css": "^3.5.8",
+    "rollup-plugin-postcss": "^4.0.2"
   }
 }
