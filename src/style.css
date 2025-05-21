@@ -34,9 +34,11 @@ body {
     object-fit: cover;
     transform: translateY(0);
     transform-origin: top left;
-    transition: transform 0.4s ease;
+    transition:
+      transform 0.4s ease,
+      clip-path 0.4s ease;
     cursor: zoom-out;
-    will-change: transform;
+    will-change: transform, clip-path;
     opacity: 0;
     z-index: 1001;
   }

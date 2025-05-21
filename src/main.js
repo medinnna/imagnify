@@ -2,6 +2,7 @@ const zoomOverlay = document.createElement('div')
 zoomOverlay.className = 'zoom-overlay'
 const zoomImage = document.createElement('img')
 zoomImage.className = 'zoom-image'
+let zoomImageClip
 let currentScroll = window.pageYOffset
 import './style.css'
 
@@ -21,47 +22,64 @@ export function mdnZoom(options) {
 
     images.forEach((image) => {
       image.addEventListener('click', () => {
-        const { src: imageSrc, width: imageWidth, height: imageHeight } = image
-        const { top, left: offsetLeft } = image.getBoundingClientRect()
-        const offsetTop = top + currentScroll
+        const {
+          src: imageSrc,
+          width: imageWidth,
+          height: imageHeight,
+          naturalWidth: imageNaturalWidth,
+          naturalHeight: imageNaturalHeight,
+        } = image
+        const { top, left: imageOffsetLeft } = image.getBoundingClientRect()
+        const imageOffsetTop = top + currentScroll
         const imageFullSrc = image.dataset.zoom
 
         zoomOverlay.style.backgroundColor = config.background
 
         zoomImage.src = imageFullSrc || imageSrc
-        zoomImage.width = imageWidth
-        zoomImage.height = imageHeight
-        zoomImage.style.top = `${offsetTop}px`
-        zoomImage.style.left = `${offsetLeft}px`
+        zoomImage.width =
+          imageNaturalWidth < imageNaturalHeight
+            ? imageWidth
+            : imageWidth *
+              (imageHeight / imageWidth) *
+              (imageNaturalWidth / imageNaturalHeight)
+        zoomImage.height =
+          imageNaturalWidth >= imageNaturalHeight
+            ? imageHeight
+            : imageHeight *
+              (imageWidth / imageHeight) *
+              (imageNaturalHeight / imageNaturalWidth)
+        zoomImage.style.top = `${imageOffsetTop - (zoomImage.height - imageHeight) / 2}px`
+        zoomImage.style.left = `${imageOffsetLeft - (zoomImage.width - imageWidth) / 2}px`
+        zoomImageClip = `inset(${(zoomImage.height - imageHeight) / 2}px ${(zoomImage.width - imageWidth) / 2}px)`
+        zoomImage.style.clipPath = zoomImageClip
 
         document.body.appendChild(zoomOverlay)
         document.body.appendChild(zoomImage)
 
         zoomImage.onload = () => {
-          const { top, left: offsetLeft } = image.getBoundingClientRect()
-          const offsetTop = top + currentScroll
+          const { top, left: imageOffsetLeft } =
+            zoomImage.getBoundingClientRect()
+          const imageOffsetTop = top + currentScroll
           const maxZoomWidth = windowWidth - config.margin * 2
           const maxZoomHeight = windowHeight - config.margin * 2
 
-          zoomImage.style.top = `${offsetTop}px`
-          zoomImage.style.left = `${offsetLeft}px`
-
           const zoomRatio = Math.min(
-            maxZoomHeight / imageHeight,
-            maxZoomWidth / imageWidth
+            maxZoomHeight / zoomImage.height,
+            maxZoomWidth / zoomImage.width
           )
 
           const zoomTopOffset =
             currentScroll +
-            ((windowHeight - imageHeight * zoomRatio) / 2 - offsetTop)
+            ((windowHeight - zoomImage.height * zoomRatio) / 2 - imageOffsetTop)
           const zoomLeftOffset =
-            (windowWidth - imageWidth * zoomRatio) / 2 - offsetLeft
+            (windowWidth - zoomImage.width * zoomRatio) / 2 - imageOffsetLeft
 
           document.body.classList.add('zoom-active')
           image.classList.add('is-hidden')
 
           zoomImage.style.opacity = 1
           zoomImage.style.transform = `translate(${zoomLeftOffset}px, ${zoomTopOffset}px) scale(${zoomRatio})`
+          zoomImage.style.clipPath = `inset(0)`
         }
       })
     })
@@ -82,6 +100,7 @@ function closeZoom() {
   if (isZoomed) {
     document.body.classList.remove('zoom-active')
     zoomImage.style.transform = 'none'
+    zoomImage.style.clipPath = zoomImageClip
 
     setTimeout(() => {
       zoomImage.remove()
