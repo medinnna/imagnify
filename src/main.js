@@ -10,8 +10,8 @@ export function mdnZoom(options) {
   const config = {
     selector: options?.selector || 'img[data-zoom]',
     background: options?.background || 'white',
-    margin: options?.margin || 50,
-    opacity: options?.opacity || 0.8,
+    margin: Math.max(0, options?.margin ?? 50),
+    opacity: Math.max(0, options?.opacity ?? 0.8),
   }
 
   document.addEventListener('DOMContentLoaded', () => {
