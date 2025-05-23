@@ -32,21 +32,21 @@ export function mdnZoom(options) {
         const { top, left: imageOffsetLeft } = image.getBoundingClientRect()
         const imageOffsetTop = top + currentScroll
         const imageFullSrc = image.dataset.zoom
+        const imageAspectRatio = imageWidth / imageHeight
+        const imageNaturalAspectRatio = imageNaturalWidth / imageNaturalHeight
 
         zoomOverlay.style.backgroundColor = config.background
 
         zoomImage.src = imageFullSrc || imageSrc
         zoomImage.width =
-          imageNaturalWidth < imageNaturalHeight
+          imageAspectRatio > imageNaturalAspectRatio
             ? imageWidth
-            : imageWidth *
-              (imageHeight / imageWidth) *
-              (imageNaturalWidth / imageNaturalHeight)
+            : imageWidth * (imageHeight / imageWidth) * imageNaturalAspectRatio
         zoomImage.height =
-          imageNaturalWidth >= imageNaturalHeight
+          imageAspectRatio < imageNaturalAspectRatio
             ? imageHeight
             : imageHeight *
-              (imageWidth / imageHeight) *
+              imageAspectRatio *
               (imageNaturalHeight / imageNaturalWidth)
         zoomImage.style.top = `${imageOffsetTop - (zoomImage.height - imageHeight) / 2}px`
         zoomImage.style.left = `${imageOffsetLeft - (zoomImage.width - imageWidth) / 2}px`
