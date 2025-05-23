@@ -11,7 +11,7 @@ export function mdnZoom(options) {
     selector: options?.selector || 'img[data-zoom]',
     background: options?.background || 'white',
     margin: options?.margin || 50,
-    opacity: options?.opacity || 0.5,
+    opacity: options?.opacity || 0.8,
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -77,6 +77,8 @@ export function mdnZoom(options) {
           document.body.classList.add('zoom-active')
           image.classList.add('is-hidden')
 
+          zoomOverlay.style.opacity = config.opacity
+
           zoomImage.style.opacity = 1
           zoomImage.style.transform = `translate(${zoomLeftOffset}px, ${zoomTopOffset}px) scale(${zoomRatio})`
           zoomImage.style.clipPath = `inset(0)`
@@ -99,6 +101,7 @@ function closeZoom() {
 
   if (isZoomed) {
     document.body.classList.remove('zoom-active')
+    zoomOverlay.style.opacity = 0
     zoomImage.style.transform = 'none'
     zoomImage.style.clipPath = zoomImageClip
 
