@@ -90,7 +90,7 @@ export function mdnZoom(options) {
       })
     })
 
-    zoomImage.addEventListener('click', closeZoom)
+    zoomWrapper.addEventListener('click', closeZoom)
   })
 
   window.addEventListener('scroll', () => {

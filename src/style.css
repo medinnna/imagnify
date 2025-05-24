@@ -1,7 +1,5 @@
 body {
   &.zoom-active {
-
-    .zoom-overlay,
     .zoom-wrapper {
       pointer-events: all;
     }
@@ -32,8 +30,10 @@ body {
   .zoom-wrapper {
     position: absolute;
     inset: 0;
+    cursor: zoom-out;
     pointer-events: none;
     overflow: hidden;
+    z-index: 1000;
   }
 
   .zoom-image {
@@ -44,9 +44,8 @@ body {
     transition:
       transform 0.4s ease,
       clip-path 0.4s ease;
-    cursor: zoom-out;
     will-change: transform, clip-path;
     opacity: 0;
-    z-index: 1001;
+    z-index: 1000;
   }
 }
