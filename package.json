@@ -1,21 +1,29 @@
 {
-  "name": "mdn-zoom",
-  "description": "Simple and lightweight library to add zoom functionality to images.",
+  "name": "@mdev/imagnify",
+  "description": "Imagnify is a simple and lightweight library to add zoom functionality to images.",
   "version": "1.0.0",
   "main": "dist/mdn-zoom.min.js",
   "type": "module",
+  "author": {
+    "name": "Carlos Medina",
+    "email": "hola@medina.dev",
+    "url": "https://medina.dev"
+  },
+  "license": "GPL-3.0-or-later",
+  "repository": "github:medinnna/imagnify",
   "keywords": [
     "zoom",
     "popup",
-    "preview"
+    "preview",
+    "lightbox",
+    "picture",
+    "image"
   ],
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "format": "prettier . --write"
   },
-  "author": "Carlos Medina",
-  "license": "SEE LICENSE IN LICENSE",
   "packageManager": "pnpm@10.7.0",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
@@ -28,5 +36,8 @@
     "rollup": "^4.41.0",
     "rollup-plugin-import-css": "^3.5.8",
     "rollup-plugin-postcss": "^4.0.2"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
