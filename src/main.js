@@ -1,5 +1,7 @@
 const zoomOverlay = document.createElement('div')
 zoomOverlay.className = 'zoom-overlay'
+const zoomWrapper = document.createElement('div')
+zoomWrapper.className = 'zoom-wrapper'
 const zoomImage = document.createElement('img')
 zoomImage.className = 'zoom-image'
 let zoomImageClip
@@ -17,11 +19,11 @@ export function mdnZoom(options) {
   document.addEventListener('DOMContentLoaded', () => {
     const windowWidth = document.body.offsetWidth
     const windowHeight = window.innerHeight
-
     const images = document.querySelectorAll(config.selector)
 
     images.forEach((image) => {
       image.addEventListener('click', () => {
+        const bodyHeight = document.body.scrollHeight
         const {
           src: imageSrc,
           width: imageWidth,
@@ -36,6 +38,7 @@ export function mdnZoom(options) {
         const imageNaturalAspectRatio = imageNaturalWidth / imageNaturalHeight
 
         zoomOverlay.style.backgroundColor = config.background
+        zoomWrapper.style.height = `${bodyHeight}px`
 
         zoomImage.src = imageFullSrc || imageSrc
         zoomImage.width =
@@ -54,7 +57,8 @@ export function mdnZoom(options) {
         zoomImage.style.clipPath = zoomImageClip
 
         document.body.appendChild(zoomOverlay)
-        document.body.appendChild(zoomImage)
+        document.body.appendChild(zoomWrapper)
+        zoomWrapper.appendChild(zoomImage)
 
         zoomImage.onload = () => {
           const { top, left: imageOffsetLeft } =
