@@ -1,5 +1,5 @@
 {
-  "name": "@mdev/imagnify",
+  "name": "@m.dev/imagnify",
   "description": "Imagnify is a simple and lightweight library to add zoom functionality to images.",
   "version": "1.0.0",
   "author": {
@@ -58,6 +58,7 @@
     "rollup-plugin-postcss": "^4.0.2"
   },
   "files": [
-    "dist"
+    "dist",
+    "hero.png"
   ]
 }
