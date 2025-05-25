@@ -4,7 +4,7 @@
   <a href="https://www.npmjs.com/package/@m.dev/imagnify" target="_blank">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/%40m.dev%2Fimagnify?color=%239a9a9a&style=for-the-badge">
   </a>
-  <img alt="NPM License" src="https://img.shields.io/npm/l/%40m.dev%2Fimagnify?color=%239a9a9a&style=for-the-badge">
+  <img alt="NPM License" src="https://img.shields.io/npm/l/%40m.dev%2Fimagnify?style=for-the-badge&color=%239a9a9a">
   <img alt="npm package minimized gzipped size" src="https://img.shields.io/bundlejs/size/%40m.dev%2Fimagnify?color=%239a9a9a&style=for-the-badge">
 </p>
 
