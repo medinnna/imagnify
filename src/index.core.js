@@ -20,6 +20,8 @@ export default function imagnify(options) {
   currentScroll = window.pageYOffset
 
   images.forEach((image) => {
+    image.style.cursor = 'zoom-in'
+
     image.addEventListener('click', () => {
       const bodyHeight = document.body.scrollHeight
       const {
