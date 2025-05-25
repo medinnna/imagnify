@@ -1,7 +1,7 @@
 {
   "name": "@m.dev/imagnify",
   "description": "Imagnify is a simple and lightweight library to add zoom functionality to images.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Carlos Medina",
     "email": "hola@medina.dev",
@@ -44,7 +44,7 @@
     "build": "rollup -c",
     "format": "prettier . --write"
   },
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@rollup/plugin-terser": "^0.4.4",
